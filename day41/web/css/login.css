@@ -1,0 +1,111 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.clearfix:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+body {
+    background-color: #060507;
+    /*background-color: #3C3F41;*/
+}
+
+.main-body {
+    width: 900px;
+    margin: auto;
+    position: relative;
+}
+
+.main-body h1 {
+    color: white;
+    position: absolute;
+    z-index: 999;
+    top: 12%;
+    font-weight: lighter;
+    font-size: 32px;
+    width: 100px;
+    left: 50%;
+    margin-left: -50px;
+    text-align: center;
+}
+
+img.bg {
+    width: 900px;
+    margin: 0 auto;
+    filter: blur(20px);
+}
+
+form {
+    /*border: 1px solid #cccccc;*/
+    width: 500px;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    margin-left: -250px;
+    text-align: center;
+}
+
+form label {
+    color: white;
+    font-size: 20px;
+}
+
+form input[type="text"], form input[type="password"], form input[type="button"] {
+    width: 300px;
+    height: 50px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+    outline: none;
+    font-size: 20px;
+    margin-bottom: 16px;
+    color: white;
+    text-align: center;
+}
+
+form input[type="button"] {
+    background-color: rgba(255, 255, 50, 0.2);
+    transition: all 180ms;
+}
+
+form input[type="button"]:hover {
+    width: 308px;
+    height: 58px;
+    font-size: 22px;
+    border-width: 2px;
+    background-color: rgba(255, 255, 50, 0.3);
+    margin-top: -4px;
+}
+
+.s-show-error {
+    margin-top: 30px;
+    color: red;
+    font-size: 16px;
+}
+
+
+.remb {
+    width: 300px;
+    height: 30px;
+    line-height:30px;
+    bottom: -25px;
+    right:50%;
+    margin-right: -150px;
+    position: absolute;
+    overflow: hidden;
+}
+.remb input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0 12px;
+}
+
+
+
+

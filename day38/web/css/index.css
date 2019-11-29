@@ -1,0 +1,81 @@
+body {
+    background-color: #3C3F41;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.main {
+    width: 550px;
+    height: 550px;
+    margin: 10% auto;
+    background-color: #cccccc;
+    position: relative;
+    border-radius: 10px;
+}
+
+.main-backboard {
+    width: 550px;
+    height: 550px;
+    border-radius: 10px;
+    /*background-color: rgba(0, 0, 0, 0.3);*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*display: none;*/
+    transition: all 500ms;
+}
+
+.main img {
+    width: 500px;
+    height: 500px;
+    margin: 25px 0 0 25px;
+    filter: blur(3px);
+    transition: all 300ms;
+}
+
+.main a {
+    border: 1px solid #cccccc;
+    text-decoration: none;
+    transition: all 120ms;
+    border-radius: 10px;
+    position: absolute;
+    text-align: center;
+    margin-top: -20px;
+    line-height: 50px;
+    font-size: 24px;
+    width: 120px;
+    height: 50px;
+    color: white;
+    z-index: 2;
+    top: 50%;
+}
+
+.main a:hover {
+    width: 128px;
+    height: 58px;
+    margin-top: -24px;
+    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.9);
+    font-size: 26px;
+    line-height: 58px;
+}
+
+.main a.a-login {
+    left: 100px;
+    background-color: firebrick;
+}
+
+.main a.a-login:hover {
+    margin-left: -4px;
+}
+
+.main a.a-regist {
+    right: 100px;
+    background-color: steelblue;
+}
+
+.main a.a-regist:hover {
+    margin-right: -4px;
+}

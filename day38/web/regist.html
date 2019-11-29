@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/login.css"/>
+</head>
+<body>
+<div class="main-body  clearfix">
+
+    <h1>登录</h1>
+
+    <img class="bg" src="images/登录页背景图.jpg"/>
+
+    <form method="post" action="${pageContext.request.contextPath}/RegistServlet">
+        <label><input type="text" name="username" value="${requestScope.userInput.username}"/></label><br/>
+        <label><input type="text" name="password" value="${requestScope.userInput.password}"/></label><br/>
+        <input type="button" value="Login" onclick="check_regist()"/><br/>
+        <span class="s-show-error">${requestScope.registMsg}</span>
+    </form>
+</div>
+</body>
+<script>
+    function check_login() {
+        var form_login = document.querySelector('form');
+        form_login.submit();
+    }
+
+    function check_regist() {
+        document.querySelector('form').submit();
+    }
+
+    window.onload = function () {
+        var s_showError = document.querySelector('.s-show-error');
+        if (s_showError.innerHTML === 'success') {
+            var remainingTime = 3;
+            var timer_jump = window.setInterval(function () {
+                if (remainingTime <= 0) {
+                    window.location.href = '${pageContext.request.contextPath}/login.jsp';
+                } else {
+                    s_showError.innerHTML = '注册成功，' + remainingTime + ' 秒后前往登录';
+                    remainingTime--;
+                }
+            }, 1000);
+        }
+    }
+</script>
+</html>

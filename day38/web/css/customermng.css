@@ -1,0 +1,121 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    /*background-color: #eeeeee;*/
+}
+
+.show-table {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+}
+
+.t-user {
+    border: 1px solid #E5E5E5;
+    border-width: 0 1px 1px 1px;
+    color: #666666;
+    font-size: 8px;
+    border-radius: 2px;
+}
+
+.t-user th, .t-user td {
+    height: 30px;
+    border: 1px solid #E5E5E5;
+    border-width: 1px 0 0 0px;
+    line-height: 30px;
+    text-align: left;
+}
+
+.t-user tr:hover {
+    background-color: #F6F7FB;
+}
+
+.t-user th {
+    background-color: #E1E2E3;
+}
+
+.t-user input[type="text"] {
+    color: #666666;
+    outline: none;
+    border: 0;
+    font-size: 8px;
+    line-height: 30px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.t-user input[type="checkbox"] {
+    width: 36px;
+}
+
+.t-user input[name="cid"] {
+    width: 36px;
+}
+
+.t-user input[name="cname"] {
+    width: 80px;
+}
+
+.t-user input[name="csex"] {
+    width: 40px;
+}
+
+.t-user input[name="cphone"] {
+    width: 120px;
+}
+
+.t-user input[name="caddress"] {
+    width: 70px;
+}
+
+.t-user input[name="cbirth"], .t-user input[name="cjointime"] {
+    width: 160px;
+}
+
+.t-user .t-option {
+    width: 90px;
+}
+
+.t-user a {
+    text-decoration: none;
+    color: #589BD8;
+}
+
+.t-user a:hover {
+    color: firebrick;
+}
+
+.show-table .t-bar {
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #E5E5E5;
+    border-width: 0 1px 1px 1px;
+    background-color: #E1E2E3;
+}
+
+.show-table .t-bar .s-pagemsg {
+    color: #666666;
+}
+
+/*----------------------------------------------*/
+#btn-deleteList {
+    position: absolute;
+    top: 320px;
+    left: 50px;
+    width: 80px;
+    height: 32px;
+    border: 0;
+    border-radius: 2px;
+    color: white;
+    outline: none;
+    transition: all 360ms;
+    cursor: pointer;
+    background-color: #FE7900;
+}
+
+#btn-deleteList[disabled] {
+    background-color: #666666;
+    cursor: auto;
+}

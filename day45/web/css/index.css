@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    /*text-align: center;*/
+}
+
+a {
+    display: block;
+    width: 100px;
+    height: 40px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    margin: 20px auto;
+    text-decoration: none;
+    text-align: center;
+    line-height: 40px;
+    color: #cccccc;
+    transition: all 180ms;
+}
+
+a:hover {
+    color: #eeeeee;
+    border-color: #ffffff;
+    box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.3);
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            /*background-color: #eeeeee;*/
+        }
+
+        .show-table {
+            position: absolute;
+            top: 10px;
+            left: 50px;
+        }
+
+        .t-user {
+            border: 1px solid #E5E5E5;
+            border-width: 0 1px 1px 1px;
+            color: #666666;
+        }
+
+        .t-user th, .t-user td {
+            height: 30px;
+            border: 1px solid #E5E5E5;
+            border-width: 1px 0 0 0px;
+            padding: 0 25px;
+            text-align: left;
+        }
+
+        .t-user th {
+            background-color: #F6F7FB;
+        }
+
+        .t-user a {
+            text-decoration: none;
+            color: #589BD8;
+        }
+
+        .show-table .t-bar {
+            height: 30px;
+            border: 1px solid #E5E5E5;
+            border-width: 0 1px 1px 1px;
+            background-color: #F6F7FB;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="show-table">
+    <table class="t-user" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <th><input type="checkbox"></th>
+            <th>客户姓名</th>
+            <th>性别</th>
+            <th>联系方式</th>
+            <th>居住地址</th>
+            <th>出生日期</th>
+            <th>注册时间</th>
+            <th>操作</th>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>张三</td>
+            <td>男</td>
+            <td>11122233343</td>
+            <td>中国</td>
+            <td>1997-02-20</td>
+            <td>2019-11-20</td>
+            <td>
+                <a href="#">删除</a>
+                <a href="#">修改</a>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>李四</td>
+            <td>女</td>
+            <td>12345612345</td>
+            <td>美国</td>
+            <td>1998-08-18</td>
+            <td>2019-11-20</td>
+            <td>
+                <a href="#">删除</a>
+                <a href="#">修改</a>
+            </td>
+        </tr>
+    </table>
+    <div class="t-bar">
+        <span>共有40条，每页显示：10条</span>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,271 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.clearfix:after {
+    content: '';
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+body {
+    background-color: #3c3f41;
+}
+
+.nav {
+    height: 50px;
+    border-bottom: 1px solid #aaaaaa;
+    /*background-color: #aaaaaa;*/
+}
+
+.nav ul {
+    width: 156px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.nav ul li {
+    list-style: none;
+}
+
+.nav ul li a {
+    margin: 8px;
+    text-decoration: none;
+    float: left;
+    padding: 0 10px;
+    height: 30px;
+    border: 1px solid #aaaaaa;
+    border-radius: 5px;
+    color: #aaaaaa;
+    text-align: center;
+    line-height: 30px;
+    transition: all 180ms;
+}
+
+.nav ul li a:hover {
+    border-color: white;
+    color: #e3e4e5;
+    box-shadow: 0 0 10px 0px rgba(255, 255, 255, 0.3);
+}
+
+/*------------------------*/
+.show-table {
+    width: 768px;
+    background-color: black;
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    margin-left: -384px;
+}
+
+table {
+    border: 1px solid steelblue;
+    border-width: 1px 0 0 1px;
+    width: 100%;
+    background-color: #333333;
+    /*margin: 50px auto 0;*/
+}
+
+/*--------添加------------*/
+.btn-add {
+    text-decoration: none;
+    float: left;
+    width: 51px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #aaaaaa;
+    border-width: 0 1px 1px 1px;
+    color: #aaaaaa;
+    border-radius: 0 0 10px 10px;
+    text-align: center;
+    font-size: 26px;
+    line-height: 50px;
+    position: absolute;
+    bottom: -50px;
+    outline: none;
+    cursor: pointer;
+}
+
+.btn-add[disabled] {
+    cursor: default;
+}
+
+.btn-add:hover {
+    border-color: white;
+    color: #e3e4e5;
+    box-shadow: 0 3px 10px 2px rgba(255, 255, 255, 0.3);
+}
+
+.btn-add[disabled]:hover {
+    border-color: firebrick;
+    color: firebrick;
+    box-shadow: 0 3px 10px 2px rgba(178, 34, 34, 0.3);
+}
+
+table th, table td {
+    border: 1px solid steelblue;
+    border-width: 0 1px 1px 0;
+    height: 42px;
+    color: #cccccc;
+    text-align: center;
+    transition: all 180ms;
+    padding: 0 10px;
+}
+
+td.td-option {
+}
+
+.td-ready-input {
+    border-bottom: 1px solid firebrick;
+}
+
+table input {
+    outline: none;
+    border: 0;
+    background-color: rgba(0, 0, 0, 0);
+    color: gold;
+    /*border-bottom: 1px solid gold;*/
+    padding-bottom: 2px;
+    text-align: center;
+    transition: all 180ms;
+}
+
+/*table input:-webkit-autofill {*/
+/*-webkit-box-shadow: 0 0 0px 1000px white inset !important;*/
+/*outline: none;*/
+/*}*/
+
+table input[disabled] {
+    border: 0;
+    color: #cccccc;
+}
+
+/*table input[name="uid"] {*/
+/*width: 50px;*/
+/*}*/
+table input[name="uname"] {
+    width: 80px;
+}
+
+table input[name="sex"] {
+    width: 40px;
+}
+
+table input[name="age"] {
+    width: 40px;
+}
+
+table input[name="birthStr"] {
+    width: 120px;
+}
+
+table input[name="email"] {
+    width: 160px;
+}
+
+/*--------修改、删除--------------*/
+table a {
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    width: 42px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: white;
+    float: left;
+    line-height: 30px;
+    transition: all 180ms;
+    border: 1px solid #cccccc;
+}
+
+table .a-update, table .a-cancel, table .a-cancel-add {
+    float: right;
+}
+
+table .a-save-add {
+    background-color: seagreen;
+    color: white;
+}
+
+table .a-cancel-add {
+    background-color: #e3e4e5;
+    color: black;
+}
+
+table a:hover {
+    /*text-decoration: underline;*/
+    font-size: 14px;
+}
+
+table .a-delete {
+    background-color: black;
+    color: #eeeeee;
+}
+
+table .a-update {
+    background-color: brown;
+    color: #eeeeee;
+}
+
+table .a-save {
+    display: none;
+    background-color: steelblue;
+    color: #eeeeee;
+}
+
+table .a-cancel {
+    display: none;
+    color: #000000;
+    background-color: #e3e4e5;
+    border-color: black;
+}
+
+/*--------分页---------------------*/
+.page-bar {
+    width: 300px;
+    margin: 0 auto;
+    /*overflow: hidden;*/
+    position: absolute;
+    top: 400px;
+    left: 50%;
+    margin-left: -150px;
+}
+
+.page-bar a {
+    float: left;
+    width: 30px;
+    height: 30px;
+    background-color: #3c3f41;
+    color: steelblue;
+    border: 1px solid steelblue;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 30px;
+    text-decoration: none;
+    transition: all 180ms;
+    margin-left: 7px;
+}
+
+.page-bar a:hover {
+    font-weight: bolder;
+    border-color: gold;
+    color: gold;
+    box-shadow: 0 0 10px 0 rgba(255, 215, 0, 0.3);
+}
+
+.page-bar a.a-back, .page-bar .a-front {
+    width: 42px;
+}
+
+.page-bar .a-currentPage {
+    color: gold;
+    border: 0;
+}
