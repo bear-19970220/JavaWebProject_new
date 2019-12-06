@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Project_XBJY/web/WEB-INF/lib/commons-logging-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Project_XBJY/web/WEB-INF/lib/log4j-1.2.16.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Project_XBJY/web/WEB-INF/lib/spring-beans-4.2.4.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Project_XBJY/web/WEB-INF/lib/spring-core-4.2.4.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Project_XBJY/web/WEB-INF/lib/spring-jdbc-4.2.4.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Project_XBJY/web/WEB-INF/lib/spring-tx-4.2.4.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

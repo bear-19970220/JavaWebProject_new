@@ -1,0 +1,141 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.form {
+    width: 300px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.form .bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: blur(3px);
+}
+
+#loginForm {
+    width: 600px;
+    height: 550px;
+    padding-top: 50px;
+    /*border: 1px solid yellow;*/
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -300px;
+    margin-left: -300px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+input[type="text"], input[type="password"] {
+    display: block;
+    width: 300px;
+    height: 50px;
+    margin: 50px auto 0;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 1px solid #1fb5ad;
+    color: #FFFFFF;
+    padding-left: 10px;
+    font: normal 16px Consolas;
+}
+
+input[name="vcode"] {
+    width: 200px;
+    float: left;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+}
+
+.vcode {
+    border: 1px solid #1fb5ad;
+    border-radius: 5px;
+    width: 300px;
+    margin: 50px auto 0;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.vcode img {
+    float: left;
+    height: 50px;
+    filter: blur(0.7px);
+}
+
+input[type="checkbox"] {
+    border-color: #1fb5ad;
+}
+
+/*-------记住密码---------------*/
+#txt_remb {
+    color: #1fb5ad;
+    float: left;
+    cursor: pointer;
+    margin-left: 8px;
+    margin-top: 15px;
+}
+
+#txt_remb:hover {
+    color: yellow;
+}
+
+#select_remb {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #1fb5ad;
+    font-size: 30px;
+    text-indent: -2px;
+    line-height: 10px;
+    color: deeppink;
+    float: left;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+#select_remb:hover {
+    border-color: yellow;
+}
+
+.d-login {
+    width: 300px;
+    margin: 50px auto;
+}
+
+.a-login {
+    text-decoration: none;
+    display: inline-block;
+    width: 120px;
+    height: 50px;
+    border: 1px solid #1fb5ad;
+    border-radius: 5px;
+    line-height: 50px;
+    font-size: 24px;
+    font-weight: lighter;
+    color: #1fb5ad;
+    transition: all 180ms;
+    float: right;
+}
+
+.a-login:hover {
+    border-color: yellow;
+    color: yellow;
+    box-shadow: 0 0 10px 3px rgba(255, 255, 0, 0.3);
+}
+/*-----------------------*/
+.loginMsg{
+    width: 300px;
+    left: 50%;
+    margin-left: -150px;
+    font-size: 26px;
+    position: absolute;
+    top: 0;
+    color: yellow;
+    letter-spacing: 7px;
+    text-align: center;
+}

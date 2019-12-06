@@ -1,0 +1,130 @@
+
+
+
+.btns {
+    width: 1636px;
+    position: absolute;
+    top: 124px;
+    left: 36px;
+}
+
+.btns .a-btn {
+    text-decoration: none;
+    float: left;
+    width: 76px;
+    height: 30px;
+    border-radius: 2px;
+    background-color: #eeeeee;
+    margin-right: 15px;
+    /*border: 1px solid #E4E4E4;*/
+    color: #7d7d7d;
+    text-align: center;
+    line-height: 30px;
+    font-size: 12px;
+    transition: all 180ms;
+}
+
+.btns .a-btn:hover {
+    background-color: #1fb5ad;
+    color: #ffffff;
+    border-color: #aaaaaa;
+}
+
+/*-----------分页---------------------*/
+.page-bar {
+    overflow: hidden;
+}
+
+.page-bar span {
+    float: left;
+    margin-left: -1px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ECECEC;
+    text-align: center;
+    line-height: 30px;
+    color: #888888;
+    background-color: #FFFFFF;
+}
+
+.page-bar span:not(.msg):hover {
+    background-color: #1fb5ad;
+    color: #FFFFFF;
+}
+
+.page-bar span.cp {
+    background-color: #1fb5ad;
+    color: #FFFFFF;
+}
+
+.page-bar > .msg {
+    border-color: rgba(0, 0, 0, 0);
+    width: 210px;
+    float: left;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.page-bar > .msg i{
+    font-style: normal;
+    margin: 0 2px;
+}
+
+/*-------搜索栏-----------*/
+.search-bar {
+    position: relative;
+    top: 42px;
+    left: 36px;
+}
+
+.search-bar * {
+    float: left;
+    margin-right: 15px;
+}
+
+.search-bar input[type="text"] {
+    width: 130px;
+    height: 30px;
+    border: 1px solid #ECECEC;
+    background-color: rgba(0, 0, 0, 0);
+    padding: 10px;
+    color: #666666;
+}
+
+.search-bar input[type="text"]::placeholder {
+    color: #888888;
+}
+
+.search-bar select {
+    width: 100px;
+    height: 30px;
+    border: 1px solid #ECECEC;
+    color: #C4C4C4;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+.search-bar select:focus {
+    color: #666666;
+}
+
+.search-bar select option {
+    color: #666666;
+}
+
+.search-bar a {
+    text-decoration: none;
+    width: 66px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    background-color: #eeeeee;
+    color: #7d7d7d;
+    font-size: 13px;
+    transition: all 180ms;
+}
+
+.search-bar a:hover {
+    background-color: #1fb5ad;
+    color: #ffffff;
+}

@@ -1,0 +1,54 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?kjxxaa');
+  src:  url('fonts/icomoon.eot?kjxxaa#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?kjxxaa') format('truetype'),
+    url('fonts/icomoon.woff?kjxxaa') format('woff'),
+    url('fonts/icomoon.svg?kjxxaa#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-home:before {
+  content: "\e900";
+}
+.icon-file-text2:before {
+  content: "\e926";
+}
+.icon-coin-dollar:before {
+  content: "\e93b";
+}
+.icon-users:before {
+  content: "\e972";
+}
+.icon-user-tie:before {
+  content: "\e976";
+}
+.icon-cog:before {
+  content: "\e994";
+}
+.icon-pie-chart:before {
+  content: "\e99a";
+}
+.icon-flag:before {
+  content: "\e9cc";
+}
+.icon-onedrive:before {
+  content: "\eaaf";
+}
