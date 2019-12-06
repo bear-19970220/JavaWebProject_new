@@ -27,6 +27,7 @@ public class LoginServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
 
+        // 设置编码
         req.setCharacterEncoding("utf-8");
 
         // 封装表单信息
@@ -51,13 +52,14 @@ public class LoginServlet extends HttpServlet {
                 req.setAttribute("loginMsg", loginMsg);
                 req.setAttribute("userInfo", userInfo);
                 req.getRequestDispatcher("/view/login.jsp").forward(req, resp);
+                return;
             }
         }
 
 
         // 输入校验
         if (account == null || account.isEmpty() || password == null || password.isEmpty()) {
-            loginMsg = "用户名密码不能为空！";
+            loginMsg = "请填写用户名密码！";
             req.setAttribute("loginMsg", loginMsg);
             req.setAttribute("userInfo", userInfo);
             req.getRequestDispatcher("/view/login.jsp").forward(req, resp);
@@ -78,22 +80,26 @@ public class LoginServlet extends HttpServlet {
         // 记住密码：保存 Cookie
         String remberLogin = req.getParameter("remberLogin");
         if ("on".equalsIgnoreCase(remberLogin)) {
+            // 将用户信息以 JSON 格式存储 Cookie
             ObjectMapper om = new ObjectMapper();
-
             String userInfo_jsonStr = om.writeValueAsString(userInfo);
             System.out.println("即将存入 Cookie：" + userInfo_jsonStr);
-            System.out.println("Cookie 编码后：" + URLEncoder.encode(userInfo_jsonStr, "utf-8"));
-
+//            System.out.println("Cookie 编码后：" + URLEncoder.encode(userInfo_jsonStr, "utf-8"));
             Cookie cookie = new Cookie("userInfo", URLEncoder.encode(userInfo_jsonStr, "utf-8"));
             cookie.setMaxAge(7 * 24 * 60 * 60);
+            cookie.setPath(req.getContextPath());
             resp.addCookie(cookie);
         } else {
             Cookie[] cookies = req.getCookies();
-            for (Cookie c : cookies) {
-                if (c.getName().equals("userInfo")) {
-                    System.out.println("即将移除：" + c.getName() + "-" + c.getValue());
-                    c.setMaxAge(0);
-                    System.out.println("成功移除登录 Cookie ...");
+            if (cookies != null && cookies.length != 0) {
+                for (Cookie c : cookies) {
+                    if ("userInfo".equals(c.getName())) {
+                        System.out.println("即将移除：" + c.getName() + "-" + c.getValue());
+                        c.setMaxAge(0);
+                        c.setPath(req.getContextPath());
+                        resp.addCookie(c);
+                        System.out.println("成功移除登录 Cookie ...");
+                    }
                 }
             }
         }
@@ -102,14 +108,7 @@ public class LoginServlet extends HttpServlet {
         // 登陆成功
         System.out.println("登录成功！");
         req.getSession().setAttribute("user", user);
-        req.getRequestDispatcher("/PageListUserServlet").forward(req, resp);
-
-
-//        loginMsg = "登陆成功";
-//        req.setAttribute("loginMsg", loginMsg);
-//        req.setAttribute("userInfo", userInfo);
-//        req.getRequestDispatcher("view/login.jsp").forward(req, resp);
-
+        resp.sendRedirect(req.getContextPath() + "/PageListUserServlet");
 
     }
 

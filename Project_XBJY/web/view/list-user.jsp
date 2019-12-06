@@ -13,9 +13,7 @@
     <link rel="stylesheet" href="../static/css/common.css"/>
     <link rel="stylesheet" href="../static/css/list-user.css"/>
     <style>
-        .td-check {
-            padding-left: 12px;
-        }
+
     </style>
 </head>
 <body>
@@ -30,6 +28,7 @@
 
         <!-- 条件查询 -->
         <div class="search-bar">
+            <input type="hidden" name="cp" value="${cp}"/>
             <input type="text" name="uname" value="${cdUser.name}" placeholder="客户姓名"/>
             <select id="select_sex" name="sex">
                 <option value="">-- 性别 --</option>
@@ -44,8 +43,8 @@
         </div>
         <!-- 功能按键 -->
         <div class="btns">
-            <a class="a-btn" href="${pageContext.request.contextPath}/view/add-user.jsp">添加客户</a>
-            <a class="a-btn" href="javascript:deleteSelectedUser();">删除选中</a>
+            <a class="a-add" href="${pageContext.request.contextPath}/view/add-user.jsp">添加客户</a>
+            <a class="a-del disabled" href="javascript:;">删除选中</a>
         </div>
         <!-- 客户表格 -->
         <form id="form_delSelected" action="${pageContext.request.contextPath}/DeleteSelectedUser" method="post">
@@ -69,7 +68,9 @@
                 <c:if test="${not empty requestScope.page.beanList}">
                     <c:forEach var="user" items="${requestScope.page.beanList}" varStatus="s">
                         <tr>
-                            <td class="td-check"><input type="checkbox" name="check"value="${user.uid}"/></td>
+                            <td class="td-check">
+                                <input type="checkbox" name="check" value="${user.uid}"/>
+                            </td>
                             <td>${s.count}</td>
                             <td>${user.dname}</td>
                             <td>${user.account}</td>
@@ -91,7 +92,7 @@
 
                     <%-- 分页条 --%>
                     <tr class="tr-page">
-                        <td colspan="13">
+                        <td colspan="14">
                             <div class="page-bar">
 
                                 <span class="msg">每页显示<i>${requestScope.page.pageSize}</i>条，共有<i>${requestScope.page.totalRecord}</i>条</span>
@@ -173,135 +174,19 @@
                     </tr>
                 </c:if>
             </table>
-        </form>
+            <%--</form>--%>
     </div>
 </div>
 </body>
 
 <script>
     var contextPath = '${pageContext.request.contextPath}';
+    var cdUser_deptId = '${cdUser.deptId}';
+    var cdUser_sex = '${cdUser.sex}';
 </script>
+<script src="${pageContext.request.contextPath}/static/js/list-user.js"></script>
 <script>
-    window.addEventListener('load', function () {
-        init_select_dept();
-        init_check();
-    });
 
-    /**
-     * 全选全不选
-     */
-    function init_check() {
-        var check_all = document.querySelector('#check_all');
-        var checkboxs = document.querySelectorAll('td input[type="checkbox"]');
-        // 全选 / 全不选
-        check_all.addEventListener('click', function () {
-            for (var i = 0; i < checkboxs.length; i++) {
-                checkboxs[i].checked = this.checked;
-            }
-        });
-        // 其他
-        for (var i = 0; i < checkboxs.length; i++) {
-            checkboxs[i].addEventListener('click', function () {
-                var flag = true;
-                for (var i = 0; i < checkboxs.length; i++) {
-                    if (checkboxs[i].checked == false) {
-                        flag = false;
-                    }
-                }
-                check_all.checked = flag;
-            });
-        }
-    }
-
-    function deleteSelectedUser() {
-        var form_delSelected = document.querySelector('#form_delSelected');
-        form_delSelected.submit();
-    }
-
-    /**
-     * 初始化：下拉列表
-     */
-    function init_select_dept() {
-        // 初始化下拉列表数据 + 查询条件回显
-        var select_dept = document.querySelector('#select_dept');
-        $.get(contextPath + '/ListDeptAjaxServlet', function (depts) {
-            var innerHtml = [];
-            for (var k in depts) {
-                var d = depts[k];
-                if ('${cdUser.deptId}' == d.id) {
-                    innerHtml.push('<option value="' + d.id + '" selected="selected">' + d.name + '</option>');
-                } else {
-                    innerHtml.push('<option value="' + d.id + '">' + d.name + '</option>');
-                }
-            }
-            select_dept.innerHTML += innerHtml.join('');
-        }, 'json');
-
-        var select_sex = document.querySelector('#select_sex');
-        if (${not empty cdUser.sex}) {
-            if ('${cdUser.sex}' == 1) {
-                select_sex.querySelector('option[value="1"]').selected = true;
-            } else if ('${cdUser.sex}' == 0) {
-                select_sex.querySelector('option[value="0"]').selected = true;
-            }
-        }
-    }
-
-    /**
-     * 删除用户
-     */
-    function deleteUser(uid) {
-        if (window.confirm("确认删除？")) {
-            window.location.href = '${pageContext.request.contextPath}/DeleteUserServlet?uid=' + uid;
-        }
-    }
-
-    /**
-     * 修改用户
-     */
-    function updateUser(uid) {
-        window.location.href = '${pageContext.request.contextPath}/UpdateUserViewServlet?uid=' + uid;
-    }
-
-    /**
-     * 条件查询
-     */
-    function searchUser(cp) {
-        window.location.href = contextPath + '/PageListUserServlet?1=1' + getCondition(cp);
-    }
-
-    function getCondition(cp) {
-// 预备数组（参数容器）
-        var condition = [];
-        // 获取条件
-        var uname = document.querySelector('.search-bar input[name="uname"]').value;
-        var sex = document.querySelector('#select_sex').value;
-        var deptId = document.querySelector('#select_dept').value;
-        // 条件参数拼接
-        if (cp) {
-            condition.push('&cp=' + cp);
-        }
-        if (uname) {
-            condition.push('&uname=' + uname);
-        }
-        if (sex) {
-            condition.push('&sex=' + sex);
-        }
-        if (deptId) {
-            condition.push('&deptId=' + deptId);
-        }
-        console.log('查询条件拼接结果：' + condition.join(''));
-        return condition.join('');
-    }
-
-    /**
-     * 重置查询条件
-     */
-    function clearCondition() {
-        document.querySelector('.search-bar input[name="uname"]').value = '';
-        var sex = document.querySelector('#select_sex').value = '';
-        var deptId = document.querySelector('#select_dept').value = '';
-    }
 
 </script>
 

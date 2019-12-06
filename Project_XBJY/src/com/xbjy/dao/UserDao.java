@@ -26,4 +26,6 @@ public interface UserDao {
     List<User> findUserByCondition(String condition, int begin, int count);
 
     User findUserByAccountAndPassword(String account, String password);
+
+    void deleteUser(int uid);
 }

@@ -1,22 +1,23 @@
-
 * {
     margin: 0;
     padding: 0;
 }
 
-.form {
-    width: 300px;
-    margin: 50px auto;
-    text-align: center;
+:root {
+    /*--theme_color: #1fb5ad;*/
+    --theme_color: #2CFFF7;
 }
 
-.form .bg-img {
-    position: absolute;
-    top: 0;
-    left: 0;
+.main {
+    position: relative;
+}
+
+.bg-img{
     filter: blur(3px);
 }
 
+
+/*------登录表单------------*/
 #loginForm {
     width: 600px;
     height: 550px;
@@ -38,10 +39,14 @@ input[type="text"], input[type="password"] {
     margin: 50px auto 0;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.3);
-    border: 1px solid #1fb5ad;
+    border: 1px solid var(--theme_color);
     color: #FFFFFF;
     padding-left: 10px;
     font: normal 16px Consolas;
+}
+
+input[type="text"]::placeholder, input[type="password"]::placeholder {
+    color: var(--theme_color);
 }
 
 input[name="vcode"] {
@@ -53,7 +58,7 @@ input[name="vcode"] {
 }
 
 .vcode {
-    border: 1px solid #1fb5ad;
+    border: 1px solid var(--theme_color);
     border-radius: 5px;
     width: 300px;
     margin: 50px auto 0;
@@ -68,12 +73,12 @@ input[name="vcode"] {
 }
 
 input[type="checkbox"] {
-    border-color: #1fb5ad;
+    border-color: var(--theme_color);
 }
 
 /*-------记住密码---------------*/
 #txt_remb {
-    color: #1fb5ad;
+    color: var(--theme_color);
     float: left;
     cursor: pointer;
     margin-left: 8px;
@@ -88,7 +93,7 @@ input[type="checkbox"] {
     display: inline-block;
     width: 20px;
     height: 20px;
-    border: 1px solid #1fb5ad;
+    border: 1px solid var(--theme_color);
     font-size: 30px;
     text-indent: -2px;
     line-height: 10px;
@@ -104,20 +109,21 @@ input[type="checkbox"] {
 
 .d-login {
     width: 300px;
-    margin: 50px auto;
+    margin: 50px auto 0;
 }
 
 .a-login {
     text-decoration: none;
     display: inline-block;
-    width: 120px;
+    width: 144px;
     height: 50px;
-    border: 1px solid #1fb5ad;
+    border: 1px solid var(--theme_color);
     border-radius: 5px;
+    text-align: center;
     line-height: 50px;
     font-size: 24px;
     font-weight: lighter;
-    color: #1fb5ad;
+    color: var(--theme_color);
     transition: all 180ms;
     float: right;
 }
@@ -127,15 +133,49 @@ input[type="checkbox"] {
     color: yellow;
     box-shadow: 0 0 10px 3px rgba(255, 255, 0, 0.3);
 }
-/*-----------------------*/
-.loginMsg{
+
+/*-------电子表---------------*/
+.timer {
+    width: 300px;
+    height: 40px;
+    color: var(--theme_color);
+    margin: 10px auto 0;
+    text-align: right;
+    letter-spacing: 2px;
+    font-size: 12px;
+    font-weight: lighter;
+}
+
+
+/*-------登录信息----------------*/
+.loginMsg {
     width: 300px;
     left: 50%;
     margin-left: -150px;
     font-size: 26px;
     position: absolute;
-    top: 0;
+    top: 5%;
     color: yellow;
     letter-spacing: 7px;
     text-align: center;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

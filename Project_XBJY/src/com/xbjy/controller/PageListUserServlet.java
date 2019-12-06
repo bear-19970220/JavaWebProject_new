@@ -54,25 +54,24 @@ public class PageListUserServlet extends HttpServlet {
             sb.append(" and u.dept_id = " + Integer.parseInt(deptId));
             cdUser.setDeptId(Integer.parseInt(deptId));
         }
-
         System.out.println("查询条件：" + sb);
 
         // 获取当前页
         String currentPage = req.getParameter("cp");
 
         // 填充 PageBean
-        Page page = new Page();
+        Page<User> page = new Page<User>();
         // 当前页
         page.setCurrentPage(currentPage == null ? 1 : Integer.parseInt(currentPage));
         // 页容
         page.setPageSize(PAGE_SIZE);
 
        // 页面数据
-//        List<User> users = userService.pageListUser(page);
+//        List<User> users = userService.pageListUser(page);    // 无条件查询
         List<User> users = userService.searchUser(sb.toString(), page);
-
-        System.out.println("查询结果：");
-        users.forEach(x-> System.out.println(x));
+//        System.out.println("查询结果：");
+//        users.forEach(x-> System.out.println(x));
+        page.setBeanList(users);
 
 
         // 总记录数
@@ -81,9 +80,6 @@ public class PageListUserServlet extends HttpServlet {
         page.setTotalRecord(totalRecord);
         // 总页数
         page.setTotalPage(totalRecord % PAGE_SIZE == 0 ? totalRecord / PAGE_SIZE : totalRecord / PAGE_SIZE + 1);
-
-
-        page.setBeanList(users);
 
 
         System.out.println(page);

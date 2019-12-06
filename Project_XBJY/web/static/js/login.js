@@ -2,6 +2,7 @@
  * 来了老弟
  */
 window.addEventListener('load', function () {
+    init_timer();
     init_vcode();
     enterLogin();
     bgImageSuit();
@@ -36,7 +37,7 @@ function init_selectRemb() {
  * 自适应背景
  */
 function bgImageSuit() {
-    var bgImg = document.querySelector('.bg-img');
+    var bgImg = document.querySelector('.bg-img img');
     bgImg.style.width = window.innerWidth;
     bgImg.style.height = window.innerHeight;
     window.addEventListener('resize', function () {
@@ -73,5 +74,37 @@ function init_vcode() {
         vcodeImg.addEventListener('click', function () {
             this.src = contextPath + '/VCodeServlet?time' + new Date().getTime();
         });
+    }
+}
+
+/**
+ * 电子表
+ */
+function init_timer() {
+    var timer = document.querySelector('.timer');
+    timer.innerHTML = getCurrentTime();
+    window.setInterval(function () {
+        timer.innerHTML = getCurrentTime();
+    }, 1000);
+
+    /**
+     * 获取当前时间（自动补零）
+     * @returns {string}
+     */
+    function getCurrentTime() {
+        var d = new Date();
+        var year = d.getFullYear();
+        year = year > 9 ? year : '0' + year;
+        var month = d.getMonth() + 1;
+        month = month > 9 ? month : '0' + month;
+        var day = d.getDate();
+        day = day > 9 ? day : '0' + day;
+        var hour = d.getHours();
+        hour = hour > 9 ? hour : '0' + hour;
+        var minute = d.getMinutes();
+        minute = minute > 9 ? minute : '0' + minute;
+        var second = d.getSeconds();
+        second = second > 9 ? second : '0' + second;
+        return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
     }
 }

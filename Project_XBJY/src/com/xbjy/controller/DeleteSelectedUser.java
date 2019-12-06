@@ -1,5 +1,8 @@
 package com.xbjy.controller;
 
+import com.xbjy.service.UserService;
+import com.xbjy.service.impl.UserServiceImpl;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,11 +19,40 @@ import java.util.Arrays;
 @WebServlet("/DeleteSelectedUser")
 public class DeleteSelectedUser extends HttpServlet {
 
+    private UserService userService = new UserServiceImpl();
+
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("请求链接：" + req.getRequestURI());
+        String[] uids = req.getParameterValues("uid");
+        System.out.println("即将删除：" + Arrays.toString(uids));
 
-        String[] uids = req.getParameterValues("check");
-        System.out.println(Arrays.toString(uids));
+//        userService.deleteSelectedUser(uids);
+        System.out.println("删除完毕！");
+
+
+        StringBuilder sb = new StringBuilder();
+        String cp = req.getParameter("cp");
+        if (cp != null && !cp.isEmpty()) {
+            sb.append("&cp=" + cp);
+        }
+        String uname = req.getParameter("uname");
+        if (uname != null && !uname.isEmpty()) {
+            sb.append("&uname=" + uname);
+        }
+        String sex = req.getParameter("sex");
+        if (sex != null && !sex.isEmpty()) {
+            sb.append("&sex=" + sex);
+        }
+        String deptId = req.getParameter("deptId");
+        if (deptId != null && !deptId.isEmpty()) {
+            sb.append("&deptId=" + deptId);
+        }
+
+        System.out.println("删除后，查询条件：" + sb.toString());
+
+        resp.sendRedirect(req.getContextPath() + "/PageListUserServlet?1=1" + sb.toString());
+
 
     }
 }

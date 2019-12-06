@@ -21,9 +21,9 @@
 }
 
 .content {
+    /*border: 1px solid #1fb5ad;*/
     float: left;
     position: relative;
-    /*border: 1px solid #1fb5ad;*/
 }
 
 .content table {
@@ -46,6 +46,11 @@
     text-align: left;
     height: 45px;
 }
+
+.td-check {
+    padding-left: 12px;
+}
+
 
 .content table th {
     background-color: #F6F7F8;

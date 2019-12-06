@@ -33,6 +33,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void deleteSelectedUser(String[] uids) {
+        for (String uid :uids) {
+            userDao.deleteUser(Integer.parseInt(uid));
+        }
+    }
+
+    @Override
     public User loginUser(User userInfo) {
         User user = null;
         try {

@@ -20,6 +20,12 @@ public class UserDaoImpl implements UserDao {
     private JdbcTemplate jdbcTemplate = new JdbcTemplate(DBUtils.createDataSource());
 
     @Override
+    public void deleteUser(int uid) {
+        String sql = "update sys_user set del_flag = 1 where id = ?";
+        jdbcTemplate.update(sql, uid);
+    }
+
+    @Override
     public User findUserByAccountAndPassword(String account, String password) {
         String sql = "select \n" +
                 "u.id as uid,\n" +
@@ -87,14 +93,14 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateUser(User user) {
-        String sql = "update sys_user set " +
-                "dept_id = ?," +
-                "account=?," +
-                "password=?," +
-                "name=?," +
-                "sex=?," +
-                "email=?," +
-                "birth_date=?\n" +
+        String sql = "update sys_user set\n" +
+                "dept_id = ?,\n" +
+                "account = ?,\n" +
+                "password = ?,\n" +
+                "name = ?,\n" +
+                "sex = ?,\n" +
+                "email = ?,\n" +
+                "birth_date = ?\n" +
                 "where id=?";
         Object[] params = {user.getDeptId(), user.getAccount(), user.getPassword(), user.getName(), user.getSex(), user.getEmail(), user.getBirth(), user.getUid()};
         jdbcTemplate.update(sql, params);
@@ -124,8 +130,15 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
-        String sql = "insert into sys_user" +
-                "(dept_id, account, password, name, sex, email, birth_date, create_time) " +
+        String sql = "insert into sys_user(\n" +
+                "dept_id,\n" +
+                "account,\n" +
+                "password,\n" +
+                "name,\n" +
+                "sex,\n" +
+                "email,\n" +
+                "birth_date,\n" +
+                "create_time)\n" +
                 "values(?,?,?,?,?,?,?,?)";
         Object[] params = {user.getDeptId(), user.getAccount(), user.getPassword(), user.getName(),
                 user.getSex(), user.getEmail(), user.getBirth(), user.getCreateTime()};
@@ -158,7 +171,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public int getUserCount() {
-        String sql = "select count(*) from sys_user";
+        String sql = "select count(id) from sys_user";
         return jdbcTemplate.queryForObject(sql, Integer.class);
     }
 
