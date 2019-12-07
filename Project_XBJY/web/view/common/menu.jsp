@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<script src="../../static/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/static/js/jquery-3.3.1.min.js" type="text/javascript"></script>
 <style>
     .menu {
         width: 200px;

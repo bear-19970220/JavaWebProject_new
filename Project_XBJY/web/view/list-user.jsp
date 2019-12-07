@@ -10,8 +10,8 @@
 <html>
 <head>
     <title>用户管理</title>
-    <link rel="stylesheet" href="../static/css/common.css"/>
-    <link rel="stylesheet" href="../static/css/list-user.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/common.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/list-user.css"/>
     <style>
 
     </style>
