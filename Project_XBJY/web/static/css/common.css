@@ -15,26 +15,137 @@
     *zoom: 1;
 }
 
+body {
+    overflow: auto;
+}
+
 .main {
-    margin: 0 auto;
-    overflow: hidden;
+    /*overflow: auto;*/
 }
 
 .content {
-    /*border: 1px solid #1fb5ad;*/
+    /*border:1px solid #2CFFF7;*/
     float: left;
     position: relative;
 }
 
+
+/*-------搜索栏-----------*/
+.search-bar {
+    position: absolute;
+    width: 1592px;
+    /*position: relative;*/
+    top: 40px;
+    left: 36px;
+}
+
+.search-bar * {
+    float: left;
+    margin-right: 15px;
+}
+
+.search-bar input[type="text"] {
+    width: 130px;
+    height: 30px;
+    border: 1px solid #ECECEC;
+    background-color: rgba(0, 0, 0, 0);
+    padding: 10px;
+    color: #666666;
+    letter-spacing: 0.5px;
+}
+
+.search-bar input[type="text"]::placeholder {
+    color: #888888;
+}
+
+.search-bar select {
+    width: 100px;
+    height: 30px;
+    border: 1px solid #ECECEC;
+    color: #C4C4C4;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+.search-bar select:focus {
+    color: #666666;
+}
+
+.search-bar select option {
+    color: #666666;
+}
+
+.search-bar a {
+    text-decoration: none;
+    width: 66px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    background-color: #eeeeee;
+    color: #7d7d7d;
+    font-size: 13px;
+    transition: all 180ms;
+}
+
+.search-bar a:hover {
+    background-color: #1fb5ad;
+    color: #ffffff;
+}
+
+/*----功能按钮：【添加】【删除选中】--------------*/
+.btns {
+    width: 1592px;
+    position: absolute;
+    top: 120px;
+    left: 36px;
+}
+
+.btns a {
+    text-decoration: none;
+    float: left;
+    width: 76px;
+    height: 30px;
+    border-radius: 2px;
+    background-color: #eeeeee;
+    margin-right: 15px;
+    /*border: 1px solid #E4E4E4;*/
+    color: #7d7d7d;
+    text-align: center;
+    line-height: 30px;
+    font-size: 13px;
+    transition: all 180ms;
+    outline: none;
+}
+
+.btns a:not(.disabled):hover {
+    background-color: #1fb5ad;
+    color: #ffffff;
+    border-color: #aaaaaa;
+}
+
+.btns .disabled {
+    color: #c3c4c5;
+    cursor: default;
+}
+
+/*--------表格---------------*/
 .content table {
+    width: 1592px;
     border: 1px solid #ECECEC;
     /*border-width: 1px 0 0 1px;*/
     border-width: 1px 1px 0 1px;
     position: absolute;
-    top: 168px;
-    left: 35px;
-    width: 1636px;
-    /*height: 385px;*/
+    top: 160px;
+    left: 36px;
+}
+
+.content table tr {
+    color: #666666;
+}
+
+.content table tr.deleted {
+    color: #bcbcbc;
 }
 
 .content table th, .content table td {
@@ -42,15 +153,18 @@
     /*border-width: 0 1px 1px 0;*/
     border-width: 0 0 1px 0;
     font-size: 13px;
-    color: #666666;
+    /*color: #666666;*/
     text-align: left;
     height: 45px;
+}
+
+.content table th {
+    color: #666666;
 }
 
 .td-check {
     padding-left: 12px;
 }
-
 
 .content table th {
     background-color: #F6F7F8;
@@ -58,13 +172,88 @@
 
 table .a-option {
     text-decoration: none;
-    color: cornflowerblue;
+    color: #5296d6;
+    outline: none;
 }
 
-table .a-option:hover {
+table a.disabled {
+    color: rgba(82, 150, 214, 0.3);
+    cursor: default;
+}
+
+table .a-option:not(.disabled):hover {
     text-decoration: underline;
+    color: #FF7900;
 }
 
 table .tr-page {
     background-color: #F6F7F8;
 }
+
+/*-----------分页区---------------------*/
+.page-bar {
+    /*overflow: hidden;*/
+}
+
+.page-bar span {
+    float: left;
+    margin-left: -1px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ECECEC;
+    text-align: center;
+    line-height: 30px;
+    color: #888888;
+    background-color: #FFFFFF;
+}
+
+.page-bar span:not(.msg):hover {
+    background-color: #1fb5ad;
+    color: #FFFFFF;
+}
+
+.page-bar span.cp {
+    background-color: #1fb5ad;
+    color: #FFFFFF;
+}
+
+.page-bar > .msg {
+    border-color: rgba(0, 0, 0, 0);
+    width: 210px;
+    float: left;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.page-bar > .msg i {
+    font-style: normal;
+    margin: 0 2px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

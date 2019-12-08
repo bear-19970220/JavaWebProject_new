@@ -2,12 +2,34 @@
  * 来了老弟
  */
 window.addEventListener('load', function () {
+    init_inputs();
     init_timer();
     init_vcode();
     enterLogin();
     bgImageSuit();
     init_selectRemb();
 });
+
+/**
+ * 控制输入框提示信息
+ */
+function init_inputs() {
+    var in_account = document.querySelector('input[name="account"]');
+    var in_password = document.querySelector('input[name="password"]');
+    in_account.addEventListener('focus', function(){
+        this.placeholder = '';
+    });
+    in_account.addEventListener('blur', function () {
+        this.placeholder = '用户名';
+    });
+
+    in_password.addEventListener('focus', function(){
+        this.placeholder = '';
+    });
+    in_password.addEventListener('blur', function () {
+        this.placeholder = '密码';
+    });
+}
 
 /**
  * 记住密码勾选框

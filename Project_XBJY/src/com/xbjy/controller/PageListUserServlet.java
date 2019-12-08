@@ -12,8 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
+ * 条件分页查询
+ *
  * @author 杨智球
  * @company 东方标准
  * @date 2019/12/3 14:49
@@ -32,10 +35,23 @@ public class PageListUserServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
+
         // 获取查询条件
         String uname = req.getParameter("uname");
         String sex = req.getParameter("sex");
         String deptId = req.getParameter("deptId");
+
+
+        // 获取来自【修改】的查询条件
+        Map<String, String> updateCdMap = (Map<String, String>) req.getSession().getAttribute("updateCdMap");
+        if (updateCdMap != null && updateCdMap.size() != 0) {
+            System.out.println("分页 Servlet 接收到修改条件Map：");
+            updateCdMap.forEach((k, v) -> System.out.println(k + '-' + v));
+        }
+        uname = updateCdMap.get("uname");
+        sex = updateCdMap.get("sex");
+        deptId = updateCdMap.get("deptId");
+
 
         // 封装条件
         User cdUser = new User();
@@ -66,13 +82,12 @@ public class PageListUserServlet extends HttpServlet {
         // 页容
         page.setPageSize(PAGE_SIZE);
 
-       // 页面数据
+        // 页面数据
 //        List<User> users = userService.pageListUser(page);    // 无条件查询
         List<User> users = userService.searchUser(sb.toString(), page);
 //        System.out.println("查询结果：");
 //        users.forEach(x-> System.out.println(x));
         page.setBeanList(users);
-
 
         // 总记录数
         int totalRecord = userService.getTotalRecord(sb.toString());
@@ -81,13 +96,10 @@ public class PageListUserServlet extends HttpServlet {
         // 总页数
         page.setTotalPage(totalRecord % PAGE_SIZE == 0 ? totalRecord / PAGE_SIZE : totalRecord / PAGE_SIZE + 1);
 
-
         System.out.println(page);
         req.setAttribute("cdUser", cdUser);
         req.setAttribute("page", page);
         req.getRequestDispatcher("/view/list-user.jsp").forward(req, resp);
-
-
 
     }
 }

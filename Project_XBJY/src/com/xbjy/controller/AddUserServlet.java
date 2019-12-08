@@ -1,5 +1,6 @@
 package com.xbjy.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xbjy.domain.User;
 import com.xbjy.service.UserService;
 import com.xbjy.service.impl.UserServiceImpl;
@@ -13,6 +14,8 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author 杨智球
@@ -31,24 +34,29 @@ public class AddUserServlet extends HttpServlet {
 
         String account = req.getParameter("account");
         String password = req.getParameter("password");
-        String name = req.getParameter("name");
+        String passwordConfirm = req.getParameter("passwordConfirm");
+        String name = req.getParameter("uname");
         String deptId = req.getParameter("deptId");
         String sex = req.getParameter("sex");
         String email = req.getParameter("email");
         String birthStr = req.getParameter("birthStr");
 
-        User user = new User();
-        user.setAccount(account);
-        if(deptId != null && !deptId.isEmpty()) {
-            user.setDeptId(Integer.parseInt(deptId));
-        }
-        user.setName(name);
-        user.setPassword(password);
-        user.setSex(Integer.parseInt(sex));
-        user.setEmail(email);
-        user.setCreateTime(new Date());
+        // 表单输入对象
+        User userInfo = new User();
 
-        if(birthStr != null && !birthStr.isEmpty()) {
+        // 封装表单信息
+        userInfo.setAccount(account);
+        if (deptId != null && !deptId.isEmpty()) {
+            userInfo.setDeptId(Integer.parseInt(deptId));
+        }
+        userInfo.setName(name);
+        userInfo.setPassword(password);
+        if (sex != null && !sex.isEmpty()) {
+            userInfo.setSex(Integer.parseInt(sex));
+        }
+        userInfo.setEmail(email);
+        userInfo.setCreateTime(new Date());
+        if (birthStr != null && !birthStr.isEmpty()) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date birth = null;
             try {
@@ -56,19 +64,80 @@ public class AddUserServlet extends HttpServlet {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            user.setBirth(birth);
+            userInfo.setBirth(birth);
         }
 
-        System.out.println("请求添加：" + user);
+        // 输入校验
+        String addUserMsg;
+        if (account == null || password == null || account.isEmpty() || password.isEmpty()) {
+            addUserMsg = "账号密码不能为空";
+            sendMessage(addUserMsg, userInfo, req, resp);
+            return;
+        }
 
-        userService.addUser(user);
+        if(account.length() < 3 || account.length() > 16) {
+            addUserMsg = "账号必须为3-16位的英文/数字/下划线";
+            sendMessage(addUserMsg, userInfo, req, resp);
+            return;
+        }
 
-        req.getRequestDispatcher("/PageListUserServlet").forward(req, resp);
+        if(password.length() < 6 || password.length() > 20) {
+            addUserMsg = "密码长度必须为6-20位";
+            sendMessage(addUserMsg, userInfo, req, resp);
+            return;
+        }
 
+        if(passwordConfirm == null || passwordConfirm.isEmpty()) {
+            addUserMsg = "请再次确认密码";
+            sendMessage(addUserMsg, userInfo, req, resp);
+            return;
+        }
+        if(!passwordConfirm.equals(password)) {
+            addUserMsg = "两次密码输入不一致";
+            sendMessage(addUserMsg, userInfo, req, resp);
+            return;
+        }
 
+        if (name == null || name.isEmpty()) {
+            addUserMsg = "请填写客户姓名";
+            sendMessage(addUserMsg, userInfo, req, resp);
+            return;
+        }
 
+        if(name.length() > 50) {
+            addUserMsg = "姓名长度不能超过50";
+            sendMessage(addUserMsg, userInfo, req, resp);
+            return;
+        }
 
+        if (deptId == null || deptId.isEmpty()) {
+            addUserMsg = "请选择所属部门";
+            sendMessage(addUserMsg, userInfo, req, resp);
+            return;
+        }
 
+        // 添加
+        userService.addUser(userInfo);
+        System.out.println("已成功添加：" + userInfo);
 
+        // 回传结果
+        req.setAttribute("resultFlag", 1);
+        req.getRequestDispatcher("/view/add-user.jsp").forward(req, resp);
     }
+
+    /**
+     * 回传信息
+     * @param addUserMsg
+     * @param userInfo
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    private void sendMessage(String addUserMsg, User userInfo, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("addUserMsg", addUserMsg);
+        request.setAttribute("userInfo", userInfo);
+        request.getRequestDispatcher("/view/add-user.jsp").forward(request, response);
+    }
+
 }

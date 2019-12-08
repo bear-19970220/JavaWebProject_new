@@ -27,16 +27,15 @@ public class UpdateUserServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
+        // 设置编码
         req.setCharacterEncoding("utf-8");
 
+        // 获取参数
         String uid = req.getParameter("uid");
-
-        if(uid == null || uid.isEmpty()) {
+        if (uid == null || uid.isEmpty()) {
             System.out.println("uid 为空");
             return;
         }
-
         String account = req.getParameter("account");
         String password = req.getParameter("password");
         String name = req.getParameter("name");
@@ -45,6 +44,7 @@ public class UpdateUserServlet extends HttpServlet {
         String email = req.getParameter("email");
         String birthStr = req.getParameter("birthStr");
 
+        // 封装对象
         User user = new User();
         user.setUid(Integer.parseInt(uid));
         user.setAccount(account);
@@ -56,7 +56,6 @@ public class UpdateUserServlet extends HttpServlet {
         user.setSex(Integer.parseInt(sex));
         user.setEmail(email);
         user.setCreateTime(new Date());
-
         if (birthStr != null && !birthStr.isEmpty()) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date birth = null;
@@ -68,11 +67,12 @@ public class UpdateUserServlet extends HttpServlet {
             user.setBirth(birth);
         }
 
-        System.out.println("请求修改：" + user);
+        // 修改
+//        userService.updateUser(user);
+        System.out.println("成功修改：" + user);
 
-        userService.updateUser(user);
-
-        req.getRequestDispatcher("/PageListUserServlet").forward(req, resp);
+//        req.getRequestDispatcher("/PageListUserServlet").forward(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/PageListUserServlet");
 
     }
 }

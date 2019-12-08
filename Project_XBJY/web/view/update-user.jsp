@@ -21,14 +21,13 @@
     <div class="content">
         <form action="${pageContext.request.contextPath}/UpdateUserServlet" method="post">
 
-            <c:set var="user" value="${requestScope.user}" scope="page"/>
+            <c:set var="userInfo" value="${sessionScope.userInfo}" scope="page"/>
             <div>
-                <input type="text" name="uid" value="${user.uid}"/>
-                <label>账号：<input type="text" name="account" value="${user.account}"/></label><br/>
-                <label>旧密码：<input type="text" name="password" value="${user.password}"/></label><br/>
-                <label>新密码：<input type="text" name="password" value=""/></label><br/>
-                <label>确认新密码：<input type="text" name="password" value=""/></label><br/>
-                <label>姓名：<input type="text" name="name" value="${user.name}"/></label>
+                <input type="text" name="uid" value="${userInfo.uid}"/>
+                <label>账号：<input type="text" name="account" value="${userInfo.account}"/></label><br/>
+                <label>密码：<input type="text" name="password" value="${userInfo.password}"/></label><br/>
+                <label>确认新密码：<input type="text" name="passwordConfirm" value=""/></label><br/>
+                <label>姓名：<input type="text" name="name" value="${userInfo.name}"/></label>
                 <br/>
                 所属部门：
                 <select id="select_dept" name="deptId">
@@ -40,9 +39,9 @@
                 <label><input type="radio" name="sex" value="1"/>男</label>
                 <label><input type="radio" name="sex" value="0"/>女</label>
                 <br/>
-                <label>邮件：<input type="text" name="email" value="${user.email}"/></label>
+                <label>邮件：<input type="text" name="email" value="${userInfo.email}"/></label>
             </div>
-            <label>生日：<input type="date" name="birthStr" value="${user.birthStr}"/></label>
+            <label>生日：<input type="date" name="birthStr" value="${userInfo.birthStr}"/></label>
             <br/>
             <input type="submit" value="确认修改"/>
         </form>
@@ -51,6 +50,8 @@
 </body>
 <script>
     var contextPath = '${pageContext.request.contextPath}';
+    var deptId = '${userInfo.deptId}';
+    var sex = '${userInfo.sex}';
 </script>
 <script>
 
@@ -70,7 +71,7 @@
         $.get(contextPath + '/ListDeptAjaxServlet', function (depts) {
             var innerHtml = [];
             for (var k in depts) {
-                if (depts[k].id == ${user.deptId}) {
+                if (depts[k].id == deptId) {
                     innerHtml.push('<option value="' + depts[k].id + '" selected="selected">' + depts[k].name + '</option>');
                     continue;
                 }
@@ -84,9 +85,9 @@
      * 回显：性别单选框
      */
     function init_sexRadio() {
-        if (${user.sex == 1}) {
+        if (sex === '1') {
             document.querySelector('input[name="sex"][value="1"]').checked = true;
-        } else if (${user.sex == 0}) {
+        } else if (sex === '0') {
             document.querySelector('input[name="sex"][value="0"]').checked = true;
         }
     }

@@ -1,0 +1,133 @@
+
+form {
+    position: relative;
+    top: 110px;
+    left: 36px;
+    background-color: #1fb5ad;
+}
+
+form label {
+    /*border: 1px dotted #FF7900;*/
+    height: 32px;
+    color: #7d7d7d;
+    font-size: 13px;
+    line-height: 32px;
+    margin-bottom: 15px;
+}
+
+input:not([type="radio"]) {
+    width: 200px;
+    height: 32px;
+    border: 1px solid #dcdcdc;
+    border-radius: 2px;
+    padding-left: 8px;
+    color: #666666;
+    letter-spacing: 0.5px;
+}
+
+input:not([type="radio"])::placeholder {
+    color: #a3a3a3;
+}
+
+input:not([type="radio"]).checkFailure {
+    border-color: #e74c3c;
+
+}
+
+input:not([type="radio"]).checkFailure::placeholder {
+    color: #e74c3c;
+}
+
+select {
+    border: 1px solid #dcdcdc;
+    border-radius: 2px;
+    width: 200px;
+    height: 32px;
+    color: #C4C4C4;
+    text-align: center;
+    text-align-last: center;
+    cursor: pointer;
+}
+
+select:focus {
+    color: #666666;
+}
+
+select option {
+    color: #666666;
+}
+
+select.checkFailure {
+    border-color: #e74c3c;
+}
+
+
+input[type="text"], input[type="password"] {
+    background-color: rgba(0, 0, 0, 0);
+    outline: none;
+}
+
+/*---------------------------*/
+.fd {
+    width: 300px;
+    position: absolute;
+    top: 0;
+}
+
+.fd * {
+    float: right;
+}
+
+.fd i {
+    font-style: normal;
+    float: left;
+    margin: 0 1px;
+    color: #FF7900;
+    /*font-weight: bolder;*/
+    font-size: 24px;
+}
+
+.d-l {
+    left: 0;
+    /*border: 1px dashed firebrick;*/
+}
+
+
+.d-r {
+    left: 320px;
+    /*border: 1px dashed steelblue;*/
+}
+
+.d-sex {
+    width: 200px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+}
+
+.d-sex * {
+    float: none;
+    margin-left: 2px;
+    margin-right: 5px;
+}
+
+.d-sex label {
+    margin: 0 11px;
+}
+
+/*--------保存---------*/
+.form-addUser .btns {
+    width: 200px;
+    position: static;
+    margin-top: 47px;
+}
+
+
+.form-addUser .btns > a {
+    font-size: 13px;
+}
+
+.form-addUser .btns > .a-save {
+    margin-right: 0;
+    float: right;
+}

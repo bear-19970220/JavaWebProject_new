@@ -7,41 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/head.css">
 <style>
-    *{
-        margin: 0;
-        padding: 0;
-    }
-
-    .nav {
-        height: 58px;
-        background-color: #29282e;
-        position: relative;
-    }
-
-    .logo {
-        width: 200px;
-        position: absolute;
-        top: 50%;
-        margin-top: -10px;
-
-    }
-
-    .logo span {
-        font: bolder 20px 等线;
-        float: left;
-        height: 20px;
-        line-height: 20px;
-    }
-
-    .logo .s1 {
-        color: #1fb5ad;
-        margin-left: 25px;
-    }
-    .logo .s2 {
-        color: #999999;
-    }
 
 
 </style>
