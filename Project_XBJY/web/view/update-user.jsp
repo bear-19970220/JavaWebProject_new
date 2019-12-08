@@ -10,40 +10,75 @@
 <html>
 <head>
     <title>修改用户</title>
-    <link rel="stylesheet" href="../static/css/common.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/common.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/add-user.css"/>
     <script src="${pageContext.request.contextPath}/static/js/jquery-3.3.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/js/add-user.js"></script>
+    <script src="${pageContext.request.contextPath}/static/js/update-user.js"></script>
+    <style>
+
+    </style>
 </head>
 <body>
 
 <%@include file="common/head.jsp" %>
 <div class="main">
     <%@ include file="common/menu.jsp" %>
-    <div class="content">
-        <form action="${pageContext.request.contextPath}/UpdateUserServlet" method="post">
+    <div class="content clearfix">
 
-            <c:set var="userInfo" value="${sessionScope.userInfo}" scope="page"/>
-            <div>
-                <input type="text" name="uid" value="${userInfo.uid}"/>
-                <label>账号：<input type="text" name="account" value="${userInfo.account}"/></label><br/>
-                <label>密码：<input type="text" name="password" value="${userInfo.password}"/></label><br/>
-                <label>确认新密码：<input type="text" name="passwordConfirm" value=""/></label><br/>
-                <label>姓名：<input type="text" name="name" value="${userInfo.name}"/></label>
-                <br/>
-                所属部门：
-                <select id="select_dept" name="deptId">
-                    <option value="">-- 请选择 --</option>
-                </select>
+
+        <c:if test="${not empty requestScope.addUserMsg}">
+            <p class="addUserMsg">Error：${requestScope.addUserMsg}</p>
+        </c:if>
+
+
+        <c:set var="userInfo" value="${sessionScope.userInfo}" scope="page"/>
+        <c:remove var="userInfo" scope="session"/>
+        <form class="clearfix" action="${pageContext.request.contextPath}/UpdateUserServlet"
+              method="post">
+            <div class="fd d-l">
+                <input type="hidden" name="uid" value="${userInfo.uid}"/>
+                <label><i>·</i>客户姓名：<input type="text" name="uname" value="${userInfo.name}"/></label>
+                <label>
+                    性别：
+                    <div class="d-sex">
+                        <c:choose>
+                            <c:when test="${userInfo.sex == 1}">
+                                <label><input type="radio" name="sex" value="1" checked>男</label>
+                                <label><input type="radio" name="sex" value="0">女</label>
+                            </c:when>
+                            <c:when test="${userInfo.sex == 0}">
+                                <label><input type="radio" name="sex" value="1">男</label>
+                                <label><input type="radio" name="sex" value="0" checked>女</label>
+                            </c:when>
+                            <c:otherwise>
+                                <label><input type="radio" name="sex" value="1">男</label>
+                                <label><input type="radio" name="sex" value="0">女</label>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </label>
+                <label>邮箱：<input type="text" name="email" value="${userInfo.email}"/></label>
+                <label>生日：<input type="date" name="birthStr" value="${userInfo.birthStr}" placeholder=""/></label>
+
+                <label>
+                    <i>·</i>所属部门：
+                    <select id="select_dept" name="deptId">
+                        <option value="">- 请选择 -</option>
+                    </select>
+                </label>
             </div>
-            <div>
-                性别：
-                <label><input type="radio" name="sex" value="1"/>男</label>
-                <label><input type="radio" name="sex" value="0"/>女</label>
-                <br/>
-                <label>邮件：<input type="text" name="email" value="${userInfo.email}"/></label>
+
+            <div class="fd d-r">
+                <label><i>·</i>账号：<input type="text" name="account" value="${userInfo.account}" placeholder=""/></label><br/>
+                <label><i>·</i>密码：<input type="text" name="password" value="${userInfo.password}"
+                                         placeholder=""/></label><br/>
+                <label><i>·</i>确认新密码：<input type="text" name="passwordConfirm" value=""/></label><br/>
+                <div class="btns">
+                    <a class="a-reset" href="javascript:resetInput();">撤销修改</a>
+                    <a class="a-submit" href="javascript:submitForm();">确认修改</a>
+                </div>
             </div>
-            <label>生日：<input type="date" name="birthStr" value="${userInfo.birthStr}"/></label>
-            <br/>
-            <input type="submit" value="确认修改"/>
         </form>
     </div>
 </div>
@@ -55,42 +90,13 @@
 </script>
 <script>
 
-    window.addEventListener('load', function () {
-        // 回显：部门下拉列表
-        init_deptSelect();
-        // 回显：性别单选框
-        init_sexRadio();
+    var password = document.querySelector('input[name="password"]');
+    var passwordConfirm = document.querySelector('input[name="passwordConfirm"]');
+    password.addEventListener('click', function () {
+
     });
 
-    /**
-     * 回显：部门下拉列表
-     */
-    function init_deptSelect() {
-        // 初始化下拉列表数据
-        var select_dept = document.querySelector('#select_dept');
-        $.get(contextPath + '/ListDeptAjaxServlet', function (depts) {
-            var innerHtml = [];
-            for (var k in depts) {
-                if (depts[k].id == deptId) {
-                    innerHtml.push('<option value="' + depts[k].id + '" selected="selected">' + depts[k].name + '</option>');
-                    continue;
-                }
-                innerHtml.push('<option value="' + depts[k].id + '">' + depts[k].name + '</option>');
-            }
-            select_dept.innerHTML += innerHtml.join('');
-        }, 'json');
-    }
 
-    /**
-     * 回显：性别单选框
-     */
-    function init_sexRadio() {
-        if (sex === '1') {
-            document.querySelector('input[name="sex"][value="1"]').checked = true;
-        } else if (sex === '0') {
-            document.querySelector('input[name="sex"][value="0"]').checked = true;
-        }
-    }
 </script>
 
 </html>

@@ -38,24 +38,29 @@ public class UpdateUserServlet extends HttpServlet {
         }
         String account = req.getParameter("account");
         String password = req.getParameter("password");
-        String name = req.getParameter("name");
+        String passwordConfirm = req.getParameter("passwordConfirm");
+        String name = req.getParameter("uname");
         String deptId = req.getParameter("deptId");
         String sex = req.getParameter("sex");
         String email = req.getParameter("email");
         String birthStr = req.getParameter("birthStr");
 
+        // 表单输入对象
+        User userInfo = new User();
+
         // 封装对象
-        User user = new User();
-        user.setUid(Integer.parseInt(uid));
-        user.setAccount(account);
+        userInfo.setUid(Integer.parseInt(uid));
+        userInfo.setAccount(account);
         if (deptId != null && !deptId.isEmpty()) {
-            user.setDeptId(Integer.parseInt(deptId));
+            userInfo.setDeptId(Integer.parseInt(deptId));
         }
-        user.setName(name);
-        user.setPassword(password);
-        user.setSex(Integer.parseInt(sex));
-        user.setEmail(email);
-        user.setCreateTime(new Date());
+        userInfo.setName(name);
+        userInfo.setPassword(password);
+        if (sex != null && !sex.isEmpty()) {
+            userInfo.setSex(Integer.parseInt(sex));
+        }
+        userInfo.setEmail(email);
+        userInfo.setCreateTime(new Date());
         if (birthStr != null && !birthStr.isEmpty()) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date birth = null;
@@ -64,15 +69,81 @@ public class UpdateUserServlet extends HttpServlet {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            user.setBirth(birth);
+            userInfo.setBirth(birth);
+        }
+
+        // 输入校验
+        String updateUserMsg;
+        if (account == null || password == null || account.isEmpty() || password.isEmpty()) {
+            updateUserMsg = "账号密码不能为空";
+            sendMessage(updateUserMsg, userInfo, req, resp);
+            return;
+        }
+
+        if (account.length() < 3 || account.length() > 16) {
+            updateUserMsg = "账号必须为3-16位的英文/数字/下划线";
+            sendMessage(updateUserMsg, userInfo, req, resp);
+            return;
+        }
+
+        if (password.length() < 6 || password.length() > 20) {
+            updateUserMsg = "密码长度必须为6-20位";
+            sendMessage(updateUserMsg, userInfo, req, resp);
+            return;
+        }
+
+        if (passwordConfirm == null || passwordConfirm.isEmpty()) {
+            updateUserMsg = "请再次确认密码";
+            sendMessage(updateUserMsg, userInfo, req, resp);
+            return;
+        }
+        if (!passwordConfirm.equals(password)) {
+            updateUserMsg = "两次密码输入不一致";
+            sendMessage(updateUserMsg, userInfo, req, resp);
+            return;
+        }
+
+        if (name == null || name.isEmpty()) {
+            updateUserMsg = "请填写客户姓名";
+            sendMessage(updateUserMsg, userInfo, req, resp);
+            return;
+        }
+
+        if (name.length() > 50) {
+            updateUserMsg = "姓名长度不能超过50";
+            sendMessage(updateUserMsg, userInfo, req, resp);
+            return;
+        }
+
+        if (deptId == null || deptId.isEmpty()) {
+            updateUserMsg = "请选择所属部门";
+            sendMessage(updateUserMsg, userInfo, req, resp);
+            return;
         }
 
         // 修改
-//        userService.updateUser(user);
-        System.out.println("成功修改：" + user);
+        userService.updateUser(userInfo);
+        System.out.println("成功修改：" + userInfo);
 
-//        req.getRequestDispatcher("/PageListUserServlet").forward(req, resp);
+        // 跳转显示
         resp.sendRedirect(req.getContextPath() + "/PageListUserServlet");
 
     }
+
+    /**
+     * 回传信息
+     *
+     * @param updateUserMsg
+     * @param userInfo
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    private void sendMessage(String updateUserMsg, User userInfo, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("updateUserMsg", updateUserMsg);
+        request.setAttribute("userInfo", userInfo);
+        request.getRequestDispatcher("/view/update-user.jsp").forward(request, response);
+    }
+
 }

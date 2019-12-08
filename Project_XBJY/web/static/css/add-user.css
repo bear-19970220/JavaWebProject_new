@@ -1,4 +1,15 @@
 
+.addUserMsg {
+    width: 618px;
+    position: absolute;
+    top: 50px;
+    left: 87px;
+    font-size: 13px;
+    color: #FF7900;
+    letter-spacing: 1px;
+}
+
+
 form {
     position: relative;
     top: 110px;
@@ -116,18 +127,18 @@ input[type="text"], input[type="password"] {
 }
 
 /*--------保存---------*/
-.form-addUser .btns {
+form .btns {
     width: 200px;
     position: static;
     margin-top: 47px;
 }
 
 
-.form-addUser .btns > a {
+form .btns > a {
     font-size: 13px;
 }
 
-.form-addUser .btns > .a-save {
+form .btns > .a-submit {
     margin-right: 0;
     float: right;
 }

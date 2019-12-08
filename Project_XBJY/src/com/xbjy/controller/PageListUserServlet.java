@@ -35,23 +35,23 @@ public class PageListUserServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
-
         // 获取查询条件
+        String currentPage = req.getParameter("cp");
         String uname = req.getParameter("uname");
         String sex = req.getParameter("sex");
         String deptId = req.getParameter("deptId");
 
-
         // 获取来自【修改】的查询条件
         Map<String, String> updateCdMap = (Map<String, String>) req.getSession().getAttribute("updateCdMap");
+        req.getSession().removeAttribute("updateCdMap");
         if (updateCdMap != null && updateCdMap.size() != 0) {
             System.out.println("分页 Servlet 接收到修改条件Map：");
             updateCdMap.forEach((k, v) -> System.out.println(k + '-' + v));
+            currentPage = updateCdMap.get("cp");
+            uname = updateCdMap.get("uname");
+            sex = updateCdMap.get("sex");
+            deptId = updateCdMap.get("deptId");
         }
-        uname = updateCdMap.get("uname");
-        sex = updateCdMap.get("sex");
-        deptId = updateCdMap.get("deptId");
-
 
         // 封装条件
         User cdUser = new User();
@@ -72,13 +72,10 @@ public class PageListUserServlet extends HttpServlet {
         }
         System.out.println("查询条件：" + sb);
 
-        // 获取当前页
-        String currentPage = req.getParameter("cp");
-
         // 填充 PageBean
-        Page<User> page = new Page<User>();
+        Page<User> page = new Page<>();
         // 当前页
-        page.setCurrentPage(currentPage == null ? 1 : Integer.parseInt(currentPage));
+        page.setCurrentPage(currentPage == null || currentPage.isEmpty() ? 1 : Integer.parseInt(currentPage));
         // 页容
         page.setPageSize(PAGE_SIZE);
 

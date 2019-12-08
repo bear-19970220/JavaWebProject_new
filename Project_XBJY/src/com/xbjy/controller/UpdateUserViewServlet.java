@@ -28,16 +28,17 @@ public class UpdateUserViewServlet extends HttpServlet {
         req.setCharacterEncoding("utf-8");
 
         // 封装条件查询参数
+        String currentPage = req.getParameter("cp");
         String uname = req.getParameter("uname");
         String sex = req.getParameter("sex");
         String deptId = req.getParameter("deptId");
-        System.out.println("获取到备用条件：" + uname + '-' + sex + '-' + deptId + "，正在封装...");
+        System.out.println("获取到备用条件：" + currentPage + '-' + uname + '-' + sex + '-' + deptId + "，正在封装...");
 
         Map<String, String> updateCdMap = new HashMap<>(3);
+        updateCdMap.put("cp", currentPage);
         updateCdMap.put("uname", uname);
         updateCdMap.put("sex", sex);
         updateCdMap.put("deptId", deptId);
-
 
         String uid = req.getParameter("uid");
 

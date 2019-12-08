@@ -30,8 +30,10 @@ public class AddUserServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        // 设置编码
         req.setCharacterEncoding("utf-8");
 
+        // 获取参数
         String account = req.getParameter("account");
         String password = req.getParameter("password");
         String passwordConfirm = req.getParameter("passwordConfirm");
@@ -75,24 +77,24 @@ public class AddUserServlet extends HttpServlet {
             return;
         }
 
-        if(account.length() < 3 || account.length() > 16) {
+        if (account.length() < 3 || account.length() > 16) {
             addUserMsg = "账号必须为3-16位的英文/数字/下划线";
             sendMessage(addUserMsg, userInfo, req, resp);
             return;
         }
 
-        if(password.length() < 6 || password.length() > 20) {
+        if (password.length() < 6 || password.length() > 20) {
             addUserMsg = "密码长度必须为6-20位";
             sendMessage(addUserMsg, userInfo, req, resp);
             return;
         }
 
-        if(passwordConfirm == null || passwordConfirm.isEmpty()) {
+        if (passwordConfirm == null || passwordConfirm.isEmpty()) {
             addUserMsg = "请再次确认密码";
             sendMessage(addUserMsg, userInfo, req, resp);
             return;
         }
-        if(!passwordConfirm.equals(password)) {
+        if (!passwordConfirm.equals(password)) {
             addUserMsg = "两次密码输入不一致";
             sendMessage(addUserMsg, userInfo, req, resp);
             return;
@@ -104,7 +106,7 @@ public class AddUserServlet extends HttpServlet {
             return;
         }
 
-        if(name.length() > 50) {
+        if (name.length() > 50) {
             addUserMsg = "姓名长度不能超过50";
             sendMessage(addUserMsg, userInfo, req, resp);
             return;
@@ -127,6 +129,7 @@ public class AddUserServlet extends HttpServlet {
 
     /**
      * 回传信息
+     *
      * @param addUserMsg
      * @param userInfo
      * @param request
